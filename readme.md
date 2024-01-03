@@ -1,7 +1,7 @@
 # Seeed Studio XIAO ESP32C3
 <img src="ESP32C3XIAO.png" height="350">
 
-## Alle Infos zum Seeed Stduio XIAO ESP32C3:
+## Alle Infos zum Seeed Studio XIAO ESP32C3:
 https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/
 
 ## Arduino IDE
