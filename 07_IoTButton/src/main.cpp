@@ -8,8 +8,8 @@
  | |
  |_|
 
-www.pixeledi.eu | https://linktr.ee/pixeledi
-IoT Button | V1.0 | 01.2023
+www.pixeledi.eu | https://links.pixeledi.eu
+IoT Button | V1.0 | 01.2024
 
 */
 
