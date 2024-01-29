@@ -1,0 +1,170 @@
+[
+    {
+        "id": "fa756dc56d15b827",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d83642c65ec507ed",
+        "type": "mqtt in",
+        "z": "fa756dc56d15b827",
+        "name": "",
+        "topic": "bushaltestelle/anfrage",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "e3ba69e48ed34a2f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 80,
+        "wires": [
+            [
+                "c19e8f5aca35a74d"
+            ]
+        ]
+    },
+    {
+        "id": "474c44c375074a37",
+        "type": "mqtt out",
+        "z": "fa756dc56d15b827",
+        "name": "",
+        "topic": "bushaltestelle/info",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e3ba69e48ed34a2f",
+        "x": 790,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e8cf73800a1e962c",
+        "type": "inject",
+        "z": "fa756dc56d15b827",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 140,
+        "wires": [
+            [
+                "c19e8f5aca35a74d"
+            ]
+        ]
+    },
+    {
+        "id": "c19e8f5aca35a74d",
+        "type": "http request",
+        "z": "fa756dc56d15b827",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://www.wienerlinien.at/ogd_realtime/monitor?stopId=147&activateTrafficInfo=stoerungkurz&activateTrafficInfo=stoerunglang&activateTrafficInfo=aufzugsinfo",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "0aa17bd8421e328a"
+            ]
+        ]
+    },
+    {
+        "id": "0aa17bd8421e328a",
+        "type": "function",
+        "z": "fa756dc56d15b827",
+        "name": "function 1",
+        "func": "\nlet station = msg.payload.data.monitors[0].lines[0].towards;\nlet departure1 = msg.payload.data.monitors[0].lines[0].departures.departure[0].departureTime.countdown;\nlet departure2 = msg.payload.data.monitors[0].lines[0].departures.departure[1].departureTime.countdown;\nlet departure3 = msg.payload.data.monitors[0].lines[0].departures.departure[2].departureTime.countdown;\n\n\nlet newMsg = {}\nnewMsg.payload = {}\nnewMsg.payload.station = station;\nnewMsg.payload.departure1 = departure1;\nnewMsg.payload.departure2 = departure2;\nnewMsg.payload.departure3 = departure3;\n\nreturn newMsg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 120,
+        "wires": [
+            [
+                "36f30dcf4ed32fb9",
+                "474c44c375074a37"
+            ]
+        ]
+    },
+    {
+        "id": "36f30dcf4ed32fb9",
+        "type": "debug",
+        "z": "fa756dc56d15b827",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "e3ba69e48ed34a2f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "49.13.202.91",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
