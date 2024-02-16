@@ -30,7 +30,7 @@ Mit dem Enum wird die Hauptlogik des Sketches gesteuert.
 * nach xx Sekunden wird Ablauf neu gestartet
 
 # 3D-Files
-comming soon
+https://www.printables.com/de/model/767423-bus-stop-with-esp32
 
 Wurde mit SovleSpace erstellt
 
