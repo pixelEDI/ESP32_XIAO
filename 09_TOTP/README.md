@@ -19,6 +19,7 @@ Verwende einene ESP32 zum generieren deiner 2FA Codes.
 * ESP32C3 XIAO
 * Button + 10k Widerstand
 * OLED 0,42"
+* kleiner Schalter
 
 # Python - zum Testen/Kontrollieren 
 `#pip install pyotp`   
@@ -36,8 +37,8 @@ Mit der *totp.py* Datei kann der generierte ESP32-TOTP Code kontrolliert werden.
 
 # 3D-Files
 <img src="grafiken/totp2.png" alt="totp" width="250">
-
-folgt...   
+    
+https://www.printables.com/de/model/782383-totp-for-2fa-with-esp32-xiao
 Wurde mit SovleSpace erstellt
 
 Viel Spaß beim Nachbauen   
