@@ -1,0 +1,200 @@
+[
+    {
+        "id": "692445c6a85b5693",
+        "type": "tab",
+        "label": "ESP32_Websocket",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b7e9c7bba78d990c",
+        "type": "websocket in",
+        "z": "692445c6a85b5693",
+        "name": "",
+        "server": "66f4ba184976a052",
+        "client": "",
+        "x": 210,
+        "y": 100,
+        "wires": [
+            [
+                "a42e2604d40e23ed",
+                "46695ff021a01dcb"
+            ]
+        ]
+    },
+    {
+        "id": "a42e2604d40e23ed",
+        "type": "debug",
+        "z": "692445c6a85b5693",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "061e4fc4ae069e1f",
+        "type": "websocket out",
+        "z": "692445c6a85b5693",
+        "name": "",
+        "server": "",
+        "client": "49f0db8b8c094724",
+        "x": 520,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c6d136520d3e5bfb",
+        "type": "inject",
+        "z": "692445c6a85b5693",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 320,
+        "wires": [
+            [
+                "061e4fc4ae069e1f"
+            ]
+        ]
+    },
+    {
+        "id": "f4a695e83fa9a386",
+        "type": "function",
+        "z": "692445c6a85b5693",
+        "name": "function 2",
+        "func": "msg.payload=\"Hallo ESP32!!!\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6233dad6304afca0",
+        "type": "websocket out",
+        "z": "692445c6a85b5693",
+        "name": "",
+        "server": "66f4ba184976a052",
+        "client": "",
+        "x": 610,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "46695ff021a01dcb",
+        "type": "function",
+        "z": "692445c6a85b5693",
+        "name": "check temp",
+        "func": "let temp = parseInt(msg.payload);\nlet ledOn = 0;\n\nif(temp < 28) ledOn=1;\nelse ledOn=0;\n\nmsg.payload = ledOn;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 220,
+        "wires": [
+            [
+                "6233dad6304afca0"
+            ]
+        ]
+    },
+    {
+        "id": "0658b682e68d9e10",
+        "type": "websocket in",
+        "z": "692445c6a85b5693",
+        "name": "",
+        "server": "de4a07914f57e383",
+        "client": "",
+        "x": 260,
+        "y": 440,
+        "wires": [
+            [
+                "5e0c16600973d2d5",
+                "9b1fad91c987c434"
+            ]
+        ]
+    },
+    {
+        "id": "5e0c16600973d2d5",
+        "type": "debug",
+        "z": "692445c6a85b5693",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "9b1fad91c987c434",
+        "type": "image",
+        "z": "692445c6a85b5693",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 480,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "66f4ba184976a052",
+        "type": "websocket-listener",
+        "path": "/esp32",
+        "wholemsg": "false"
+    },
+    {
+        "id": "49f0db8b8c094724",
+        "type": "websocket-client",
+        "path": "wss://nodered.ipv64.net/esp32",
+        "tls": "",
+        "wholemsg": "false",
+        "hb": "0",
+        "subprotocol": ""
+    },
+    {
+        "id": "de4a07914f57e383",
+        "type": "websocket-listener",
+        "path": "/esp32cam",
+        "wholemsg": "false"
+    }
+]
