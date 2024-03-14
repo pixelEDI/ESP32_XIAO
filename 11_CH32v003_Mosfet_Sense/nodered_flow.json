@@ -1,0 +1,94 @@
+[
+    {
+        "id": "654f54dc1bb95e96",
+        "type": "websocket in",
+        "z": "a2dba6554b7c310b",
+        "name": "",
+        "server": "7e95516d8d90a31a",
+        "client": "",
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "f1606dbc2ea5e240",
+                "75a54f81a5620165",
+                "67fd71be97764bde"
+            ]
+        ]
+    },
+    {
+        "id": "75a54f81a5620165",
+        "type": "debug",
+        "z": "a2dba6554b7c310b",
+        "name": "debug 121",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "67fd71be97764bde",
+        "type": "function",
+        "z": "a2dba6554b7c310b",
+        "name": "dynamic filename",
+        "func": "\nmsg.filename =\"/data/esp32cam/esp32cam.jpg\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 380,
+        "wires": [
+            [
+                "3674af25e7aa66fc"
+            ]
+        ]
+    },
+    {
+        "id": "3674af25e7aa66fc",
+        "type": "file",
+        "z": "a2dba6554b7c310b",
+        "name": "write esp32 photo",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 790,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1606dbc2ea5e240",
+        "type": "image",
+        "z": "a2dba6554b7c310b",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 580,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "7e95516d8d90a31a",
+        "type": "websocket-listener",
+        "path": "/esp32cam",
+        "wholemsg": "false"
+    }
+]

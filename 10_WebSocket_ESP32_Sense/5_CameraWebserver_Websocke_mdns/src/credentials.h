@@ -1,2 +1,2 @@
-const char* ssid = "homebase 3.0";
-const char* password = "mushroom#1";
+const char* ssid = "Experimentelles Atom-Labor";
+const char* password = "One does not simply connect to this WLAN";

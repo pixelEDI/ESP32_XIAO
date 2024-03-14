@@ -1,6 +1,6 @@
 # Livestream zu Node-RED mit ESP32 Sense
 
-<img src="ESP32Sense.out" alt="esp32sense" width="250">
+<img src="ESP32Sense.png" alt="esp32sense" width="250">
 
 * Python Script zum Testen von Websocket-Server
 * Mehrere ESP32 Sketche mit Tests für Websocket Verbindung
