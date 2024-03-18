@@ -1,0 +1,173 @@
+[
+    {
+        "id": "c8119955ed1a8586",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a7ae1a40db2028b9",
+        "type": "debug",
+        "z": "c8119955ed1a8586",
+        "name": "debug 122",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a32602fe5387324e",
+        "type": "mqtt in",
+        "z": "c8119955ed1a8586",
+        "name": "",
+        "topic": "garten/pir1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "e3ba69e48ed34a2f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "a7ae1a40db2028b9",
+                "3c8fbb1d301f07e2"
+            ]
+        ]
+    },
+    {
+        "id": "6d0f5465ce5690dc",
+        "type": "inject",
+        "z": "c8119955ed1a8586",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 170,
+        "y": 260,
+        "wires": [
+            [
+                "3c8fbb1d301f07e2"
+            ]
+        ]
+    },
+    {
+        "id": "ea123d162d0caa1a",
+        "type": "debug",
+        "z": "c8119955ed1a8586",
+        "name": "debug 107",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a142933793f876ac",
+        "type": "http request",
+        "z": "c8119955ed1a8586",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "https://mynextcloud.ipv64.net/ocs/v2.php/apps/spreed/api/v1/bot/4upazqp8/message",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 260,
+        "wires": [
+            [
+                "ea123d162d0caa1a"
+            ]
+        ]
+    },
+    {
+        "id": "3c8fbb1d301f07e2",
+        "type": "function",
+        "z": "c8119955ed1a8586",
+        "name": "Nextcloud Bot MSG",
+        "func": "\nfunction signMessage(sharedSecret, message, randomHeader) {\n\n    var randomHeaderBytes = cryptojs.enc.Utf8.parse(randomHeader);\n    var sharedSecretBytes = cryptojs.enc.Utf8.parse(sharedSecret);\n    var messageBytes = cryptojs.enc.Utf8.parse(message);\n    // Erstelle eine HMAC-Instanz mit SHA256 und dem gemeinsamen Geheimnis\n    var hmac = cryptojs.algo.HMAC.create(cryptojs.algo.SHA256, sharedSecretBytes);\n    // Aktualisiere die HMAC mit dem zufälligen Header und der Nachricht\n    hmac.update(randomHeaderBytes);\n    hmac.update(messageBytes);   \n    // Berechne den endgültigen Hash und konvertiere ihn in einen Hexadezimal-String\n    var hash = hmac.finalize().toString(cryptojs.enc.Hex);\n\n    return hash;\n}\n\nconst randomValue = Array(32).fill().map(() => Math.random().toString(36)[2]).join('');\nconst secret = '81bc2c48fa3b0f828624623dac9d70d1d69876e4ed78ede67752e3521d89875b1905651bbdba0f2f';\n\nconst messageData = {\n    'message': msg.payload,\n    'silent': false\n};\n\n\nconst message = messageData.message;\nconst digest = signMessage(secret, message, randomValue);\n\nvar headers = {\n    'Content-Type': 'application/json',\n    'X-Nextcloud-Talk-Bot-Random': randomValue,\n    'X-Nextcloud-Talk-Bot-Signature': digest,\n    'OCS-APIRequest': 'true',\n};\n\nvar msg = {\n    headers: headers,\n    payload: messageData\n};\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "cryptojs",
+                "module": "crypto-js"
+            }
+        ],
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "a142933793f876ac"
+            ]
+        ]
+    },
+    {
+        "id": "e3ba69e48ed34a2f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "116.202.11.192",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
