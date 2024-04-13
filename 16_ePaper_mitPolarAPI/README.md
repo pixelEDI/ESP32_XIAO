@@ -4,6 +4,8 @@ Willkommen zum GitHub-Repository für mein Projekt zur Integration der Polar API
 In diesem Projekt habe ich einen OAuth-Flow implementiert, um auf die Polar API zuzugreifen. Z
 usätzlich habe ich ein 1,54-Zoll-ePaper-Display verwendet, auf dem eigene Grafiken und statischer Text dargestellt werden.
 
+<img src="epaper.jpg" alt="epaper" width="250">
+
 * 3x ESP32 Code für E-Ink Ansteuerung
 * 1x Node-RED Flow für OAUTH
 
