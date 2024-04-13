@@ -32,6 +32,6 @@ usätzlich habe ich ein 1,54-Zoll-ePaper-Display verwendet, auf dem eigene Grafi
 * oauth2 URL: https://flow.polar.com/oauth2/aut
 
 # 3D Design
-https://www.printables.com/de/@pixelEDI_563201/models
+https://www.printables.com/de/model/835238-stand-for-154-e-paper
 
 Viel Spaß beim Coden
