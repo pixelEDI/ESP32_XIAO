@@ -1,0 +1,270 @@
+[
+    {
+        "id": "34a74eda1aa538ca",
+        "type": "tab",
+        "label": "polarapi",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "716b220d6b2ade62",
+        "type": "http in",
+        "z": "34a74eda1aa538ca",
+        "name": "",
+        "url": "/poloardata",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 400,
+        "y": 180,
+        "wires": [
+            [
+                "05a6e989bc2755c8",
+                "e0dbd7d38fd315d2"
+            ]
+        ]
+    },
+    {
+        "id": "05a6e989bc2755c8",
+        "type": "http response",
+        "z": "34a74eda1aa538ca",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 660,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e0dbd7d38fd315d2",
+        "type": "debug",
+        "z": "34a74eda1aa538ca",
+        "name": "debug 126",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b68d2c4eee9c143c",
+        "type": "http in",
+        "z": "34a74eda1aa538ca",
+        "name": "",
+        "url": "/poloardata2",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "05a6e989bc2755c8",
+                "e0dbd7d38fd315d2"
+            ]
+        ]
+    },
+    {
+        "id": "130b49623e5df36f",
+        "type": "function",
+        "z": "34a74eda1aa538ca",
+        "name": "getToken",
+        "func": "//let authorizationCode = msg.payload.code;\nlet authorizationCode = \"75e5185d8060be768a826293fb170d99\";\nvar redirectUri = 'https://nodered.pixeledi.eu/polardata2';\n\nvar clientId = \"a2283fe6-939d-4cbe-a11d-72b2d4ff8414\";\nvar clientSecret = \"803f1f8b-dff7-4d11-ba39-865151f164b4\";\n\nvar zuKodierenderString = clientId + ':' + clientSecret;\n\nvar base64Kodiert = Buffer.from(zuKodierenderString).toString('base64');\n\nmsg.headers = {\n  'Content-Type': 'application/x-www-form-urlencoded',\n  'Accept': 'application/json',\n  'Authorization': 'Basic ' + base64Kodiert,\n};\n\nmsg.payload = {\n  \"grant_type\": \"authorization_code\",\n  \"code\": authorizationCode\n};\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 380,
+        "wires": [
+            [
+                "427de9320183f15b"
+            ]
+        ]
+    },
+    {
+        "id": "427de9320183f15b",
+        "type": "http request",
+        "z": "34a74eda1aa538ca",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://polarremote.com/v2/oauth2/token",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 380,
+        "wires": [
+            [
+                "cf61f113d3acc28c"
+            ]
+        ]
+    },
+    {
+        "id": "3a28ad3180d7ad03",
+        "type": "inject",
+        "z": "34a74eda1aa538ca",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 380,
+        "wires": [
+            [
+                "130b49623e5df36f"
+            ]
+        ]
+    },
+    {
+        "id": "cf61f113d3acc28c",
+        "type": "debug",
+        "z": "34a74eda1aa538ca",
+        "name": "debug 112",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "1ddbb5094d132859",
+        "type": "inject",
+        "z": "34a74eda1aa538ca",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 18 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 440,
+        "wires": [
+            [
+                "d7bfe21374f807c5"
+            ]
+        ]
+    },
+    {
+        "id": "d7bfe21374f807c5",
+        "type": "function",
+        "z": "34a74eda1aa538ca",
+        "name": "Registrierung",
+        "func": "\nmsg.payload = {\n  \"member-id\": 61388707\n};\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "c94abc0b9d5bc977"
+            ]
+        ]
+    },
+    {
+        "id": "c94abc0b9d5bc977",
+        "type": "http request",
+        "z": "34a74eda1aa538ca",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://www.polaraccesslink.com/v3/users/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            },
+            {
+                "keyType": "Authorization",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "Bearer d4fd2f981cb762ba684834eea749d0cf"
+            },
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 630,
+        "y": 440,
+        "wires": [
+            [
+                "8d476071c94a0310"
+            ]
+        ]
+    },
+    {
+        "id": "8d476071c94a0310",
+        "type": "debug",
+        "z": "34a74eda1aa538ca",
+        "name": "debug 127",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 440,
+        "wires": []
+    }
+]
