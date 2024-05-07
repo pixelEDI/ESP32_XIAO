@@ -1,5 +1,5 @@
 # e-Paper mit ESP32
-
+ 
 Willkommen zum GitHub-Repository für mein Projekt zur Integration der Polar API mit Node-RED! 
 In diesem Projekt habe ich einen OAuth-Flow implementiert, um auf die Polar API zuzugreifen. Z
 usätzlich habe ich ein 1,54-Zoll-ePaper-Display verwendet, auf dem eigene Grafiken und statischer Text dargestellt werden.
