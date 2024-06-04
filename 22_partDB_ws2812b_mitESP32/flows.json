@@ -1,0 +1,23 @@
+[
+    {
+        "id": "b646f9b00cf3bb86",
+        "type": "function",
+        "z": "e3ed343677e4ff85",
+        "name": "range&color",
+        "func": "\nlet id=msg.payload;\nlet neopixel = {};\n\n\nif(id==1){\n    neopixel =\n    {\n        \"from\": 1,\n        \"to\": 3,\n        \"color\": {\n            \"r\": 255,\n            \"g\": 255,\n            \"b\": 0\n        }\n    }\n}\nelse if(id==2){\n    neopixel =\n    {\n        \"from\": 4,\n        \"to\": 8,\n        \"color\": {\n            \"r\": 0,\n            \"g\": 0,\n            \"b\": 255\n        }\n    }\n}\n\n\nmsg.payload=neopixel;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 320,
+        "wires": [
+            [
+                "65d3f30e280f54b2",
+                "e1cfde88fc930af6"
+            ]
+        ]
+    }
+]
