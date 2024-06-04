@@ -6,12 +6,14 @@ https://addons.mozilla.org/de/firefox/addon/violentmonkey/
 
 ## Datenflow
 
+```mermaid
 flowchart TD
     A[PartDB] -->|Bauteil suchen| B(ID)
     B -->|xmlhttpRequest| C[Violentmonkey]
     C -->|Node-RED| D[HTTP In]
     D -->|MQTT| E[ESP32]
     E -->|von - bis| F[NEOPIXEL]
+```
 
 ## Requests
 // @grant        GM_xmlhttpRequest
