@@ -1,0 +1,39 @@
+#        _          _ ______ _____ _____
+#       (_)        | |  ____|  __ \_   _|
+#  _ __  ___  _____| | |__  | |  | || |
+# | '_ \| \ \/ / _ \ |  __| | |  | || |
+# | |_) | |>  <  __/ | |____| |__| || |_
+# | .__/|_/_/\_\___|_|______|_____/_____|
+# | |
+# |_|
+# https://links.pixeledi.eu
+# ESPHome main.yaml | 09.2024
+
+esphome:
+  name: $device_name
+
+esp32:
+  board: $device_board
+  framework:
+    type: $device_type
+
+# Enable logging
+logger:
+  level: DEBUG
+
+# Enable Home Assistant API
+# Kein MQTT gleichzeitig möglich
+# api:
+
+# ota:
+#   - platform: esphome
+#     password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_username
+  password: !secret mqtt_password

@@ -1,0 +1,372 @@
+[
+    {
+        "id": "a3555f7b5806d211",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c16b63aa50fae8d0",
+        "type": "group",
+        "z": "a3555f7b5806d211",
+        "name": "",
+        "style": {
+            "stroke": "#92d04f",
+            "label": true
+        },
+        "nodes": [
+            "02cc8705a77d1d43",
+            "df5edb0fd7f2d4da",
+            "ae612181342cbd1f"
+        ],
+        "x": 214,
+        "y": 19,
+        "w": 592,
+        "h": 82
+    },
+    {
+        "id": "02cc8705a77d1d43",
+        "type": "inject",
+        "z": "a3555f7b5806d211",
+        "g": "c16b63aa50fae8d0",
+        "name": "pixeledi schon ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 330,
+        "y": 60,
+        "wires": [
+            [
+                "ae612181342cbd1f"
+            ]
+        ]
+    },
+    {
+        "id": "df5edb0fd7f2d4da",
+        "type": "debug",
+        "z": "a3555f7b5806d211",
+        "g": "c16b63aa50fae8d0",
+        "name": "Danke",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ae612181342cbd1f",
+        "type": "function",
+        "z": "a3555f7b5806d211",
+        "g": "c16b63aa50fae8d0",
+        "name": "abonniert?",
+        "func": "if(msg.payload==false){\n    msg.payload=\"bitte abonnieren!\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 60,
+        "wires": [
+            [
+                "df5edb0fd7f2d4da"
+            ]
+        ]
+    },
+    {
+        "id": "7befb2c63d054f98",
+        "type": "mqtt in",
+        "z": "a3555f7b5806d211",
+        "name": "",
+        "topic": "tele/tasmota_4DC25E/STATE",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "389e54e41cb1b5af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 420,
+        "y": 220,
+        "wires": [
+            [
+                "44bd4ff846b251d4"
+            ]
+        ]
+    },
+    {
+        "id": "44bd4ff846b251d4",
+        "type": "debug",
+        "z": "a3555f7b5806d211",
+        "name": "debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "19739b42a69553aa",
+        "type": "mqtt in",
+        "z": "a3555f7b5806d211",
+        "name": "",
+        "topic": "studio/ping",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "389e54e41cb1b5af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "b1a14e3e67884528"
+            ]
+        ]
+    },
+    {
+        "id": "204cd16b6d9ff2af",
+        "type": "debug",
+        "z": "a3555f7b5806d211",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c80f67d58da9688f",
+        "type": "mqtt out",
+        "z": "a3555f7b5806d211",
+        "name": "",
+        "topic": "cmnd/tasmota_4DC25E/Power",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "389e54e41cb1b5af",
+        "x": 1010,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "8bf73d35ae03a59b",
+        "type": "inject",
+        "z": "a3555f7b5806d211",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "OFF",
+        "payloadType": "str",
+        "x": 750,
+        "y": 400,
+        "wires": [
+            [
+                "c80f67d58da9688f"
+            ]
+        ]
+    },
+    {
+        "id": "06dc7a84b6d8238e",
+        "type": "inject",
+        "z": "a3555f7b5806d211",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "x": 750,
+        "y": 440,
+        "wires": [
+            [
+                "c80f67d58da9688f"
+            ]
+        ]
+    },
+    {
+        "id": "b1a14e3e67884528",
+        "type": "function",
+        "z": "a3555f7b5806d211",
+        "name": "function 1",
+        "func": "msg.payload=\"OFF\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 320,
+        "wires": [
+            [
+                "e327477c817eaaf0",
+                "1459233ab1ae54c1"
+            ]
+        ]
+    },
+    {
+        "id": "e327477c817eaaf0",
+        "type": "rbe",
+        "z": "a3555f7b5806d211",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 750,
+        "y": 320,
+        "wires": [
+            [
+                "204cd16b6d9ff2af",
+                "c80f67d58da9688f"
+            ]
+        ]
+    },
+    {
+        "id": "1459233ab1ae54c1",
+        "type": "function",
+        "z": "a3555f7b5806d211",
+        "name": "delay timeout",
+        "func": "// Aktuellen Timer aus dem Kontext abrufen\nlet timeout = context.get('timeout');\n\n// Falls ein Timer existiert, zurücksetzen\nif (timeout) {\n    clearTimeout(timeout);\n}\n\n// Neuen Timer setzen\ntimeout = setTimeout(() => {\n    msg.payload = \"ON\";\n    node.send(msg);\n}, 7000);\n\n// Timer im Kontext speichern\ncontext.set('timeout', timeout);\n\n// Keine Nachricht sofort weiterleiten\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 400,
+        "wires": [
+            [
+                "e327477c817eaaf0"
+            ]
+        ]
+    },
+    {
+        "id": "efc0987897701b68",
+        "type": "inject",
+        "z": "a3555f7b5806d211",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "OFF",
+        "payloadType": "str",
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "b1a14e3e67884528"
+            ]
+        ]
+    },
+    {
+        "id": "389e54e41cb1b5af",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "65.21.105.35",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
