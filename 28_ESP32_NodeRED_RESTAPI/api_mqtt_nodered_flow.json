@@ -1,0 +1,220 @@
+[
+    {
+        "id": "8c8683fe574f6b46",
+        "type": "tab",
+        "label": "API_MQTT",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "72e5ed32e15d8630",
+        "type": "comment",
+        "z": "8c8683fe574f6b46",
+        "name": "Test URL: https://jsonplaceholder.typicode.com/guide/",
+        "info": "",
+        "x": 360,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "0659bc1b55e667dd",
+        "type": "inject",
+        "z": "8c8683fe574f6b46",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 220,
+        "wires": [
+            [
+                "7cc080557a829fa0"
+            ]
+        ]
+    },
+    {
+        "id": "77ccf565507060c2",
+        "type": "function",
+        "z": "8c8683fe574f6b46",
+        "name": "function 2",
+        "func": "let lat = msg.payload[\"data\"][0];\nlet long = msg.payload[\"data\"][1];\n\nlet body = \"Die Koordinaten lauten: \"+lat+\" | \"+long;\nlet id = 10;\n\nmsg.url =\"https://jsonplaceholder.typicode.com/posts/\"+id\n\nmsg.headers = {\n     'Content-type': 'application/json; charset=UTF-8',\n}\n\nmsg.payload = {\n    id: id,\n    title: \"via NodeRED\",\n    body: body,\n    userID: 10\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 360,
+        "wires": [
+            [
+                "0991291ad5a256e3"
+            ]
+        ]
+    },
+    {
+        "id": "7cc080557a829fa0",
+        "type": "http request",
+        "z": "8c8683fe574f6b46",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://jsonplaceholder.typicode.com/posts/10",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 490,
+        "y": 220,
+        "wires": [
+            [
+                "77715caefe6fb981",
+                "addb37328fd62a01"
+            ]
+        ]
+    },
+    {
+        "id": "77715caefe6fb981",
+        "type": "debug",
+        "z": "8c8683fe574f6b46",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "addb37328fd62a01",
+        "type": "mqtt out",
+        "z": "8c8683fe574f6b46",
+        "name": "",
+        "topic": "api/getData",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "389e54e41cb1b5af",
+        "x": 670,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9f41334bd7199c64",
+        "type": "mqtt in",
+        "z": "8c8683fe574f6b46",
+        "name": "",
+        "topic": "api/update",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "389e54e41cb1b5af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 360,
+        "wires": [
+            [
+                "77ccf565507060c2"
+            ]
+        ]
+    },
+    {
+        "id": "34649d79e68e25bd",
+        "type": "debug",
+        "z": "8c8683fe574f6b46",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "0991291ad5a256e3",
+        "type": "http request",
+        "z": "8c8683fe574f6b46",
+        "name": "",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 360,
+        "wires": [
+            [
+                "34649d79e68e25bd"
+            ]
+        ]
+    },
+    {
+        "id": "389e54e41cb1b5af",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "65.21.105.35",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
